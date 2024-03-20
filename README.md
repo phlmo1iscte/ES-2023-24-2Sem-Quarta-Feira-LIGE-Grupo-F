@@ -28,6 +28,10 @@ Este projeto deverá permitir a leitura de dados sobre os horários do ISCTE, re
 ### Descrição de erros
 
 
+
 ### Funcionalidades não implementadas ou incompletas
 
+- Esconder as colunas;
+- Adicionar as colunas;
+- incopatibilidade nos caracteres especiais.
  
