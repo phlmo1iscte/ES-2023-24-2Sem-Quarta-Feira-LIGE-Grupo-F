@@ -1,12 +1,9 @@
 package html;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Horario {
 
@@ -21,47 +18,41 @@ public class Horario {
 		data = getData(file);
 	}
 
-	public List<List<String>> getData(File csv) {
+	public List<List<String>> getData(File f){
 		List<List<String>> aux = new ArrayList<>();
-		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader(csv));
-			columnTitles = readColumnTitles(br);
-			String line;
-			while ((line = br.readLine()) != null) {
-				String[] splitLine = line.split(";");
-				List<String> linha = new ArrayList<>();
-				linha.addAll(Arrays.asList(splitLine));
-				aux.add(formatDataFromFile(linha));
+			Scanner sc = new Scanner(f);
+			columnTitles = readTitles(sc);
+			while (sc.hasNextLine()) {
+				String line=sc.nextLine();
+				List<String> str = new ArrayList<>();
+				str.addAll(Arrays.asList(line.split(";")));
+				aux.add(formataData(str));
 			}
-			br.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			sc.close();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return aux;
 	}
 	
 	// Preenche valores ausentes
 
-	private List<String> formatDataFromFile(List<String> linha) {
-		while (linha.size() < getColumnTitles().size()) {
-			linha.add("N/A");
+	private List<String> formataData(List<String> s) {
+		while (s.size() < getTitles().size()) {
+			s.add("N/A");
 		}
-		return linha;
+		return s;
 	}
 
-	public List<String> readColumnTitles(BufferedReader br) throws IOException {
+	public List<String> readTitles(Scanner s){
 		List<String> titles = new ArrayList<>();
-		String line = br.readLine();
-		if (line != null) {
-			titles = Arrays.asList(line.split(";"));
-		}
+		String str = s.nextLine();
+		titles.addAll(Arrays.asList(str.split(";")));
 		return titles;
 	}
 
-	public List<String> getColumnTitles() {
+	public List<String> getTitles() {
 		return columnTitles;
 	}
 
@@ -77,5 +68,9 @@ public class Horario {
 //		    }
 //		}
 //	}
+	
+
+	
+
 
 }

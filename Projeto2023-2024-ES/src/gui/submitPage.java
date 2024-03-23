@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -90,7 +92,7 @@ public class submitPage extends JFrame implements LayoutDefinable {
        continueButton.setPreferredSize(new Dimension(150, 50));
        bottomPanel.add(continueButton, gbcBottomPanel);
        gbcBottomPanel.gridx = 1;
-    //   JButton reloadLastSessionButton = LayoutDefinable.defineButtonLayout(Color.BLUE, Color.WHITE, "Reload Last Session", new Dimension(150, 50));
+       JButton reloadLastSessionButton = LayoutDefinable.defineButtonLayout(Color.BLUE, Color.WHITE, "Reload Last Session", new Dimension(150, 50));
        gbc.gridx = 0;
        gbc.gridy = 1;
        gbc.gridwidth = 1; // Reset grid width to 1
@@ -101,6 +103,7 @@ public class submitPage extends JFrame implements LayoutDefinable {
 
        //Faz com que a pagina ao ser iniciada apareça no centro do ecrã
        setLocationRelativeTo(null);
+		
  
 	} 
 	    

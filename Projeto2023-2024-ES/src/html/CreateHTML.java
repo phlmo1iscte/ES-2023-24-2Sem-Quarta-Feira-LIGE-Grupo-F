@@ -18,43 +18,42 @@ public class CreateHTML {
 		this.horario = h;
 		this.data = horario.getData();
 		this.columnFields = new ArrayList<>();
-		userOrderTitles = horario.getColumnTitles();
+		userOrderTitles = horario.getTitles();
 		for (String titles : userOrderTitles) {
 			String titlesTrimmed = titles.replace(" ", "");
-			columnFields.add(titlesTrimmed + "_field");
+			columnFields.add(titlesTrimmed + "description");
 		}
 	}
-
-	public List<String> tiltesPosition() {
-		List<String> titlesPosition = new ArrayList<>();
-		for (String title : userOrderTitles) {
-			titlesPosition.add(String.valueOf(horario.getColumnTitles().indexOf(title)));
-		}
-		return titlesPosition;
-	}
-
-	private String formatDataForHtml() {
-		StringBuilder jsCode = new StringBuilder();
-		jsCode.append("var tableData = [");
-		List<String> titlesPosition = tiltesPosition();
-
-		for (List<String> row : data) {
-
-			jsCode.append("{ ");
-			for (int i = 0; i < columnFields.size(); i++) {
-				jsCode.append(columnFields.get(i) + ": ");
-				String columnValue = row.get(Integer.parseInt(titlesPosition.get(i))).replace("'", "");
-				String javaScriptFormatValue = "'" + columnValue + "', ";
-				jsCode.append(javaScriptFormatValue);
+	
+	public String formatDataForHtml(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("var tableData = [");
+		
+		for (List<String> string : data) {
+			sb.append("{ ");
+			for(int i = 0; i < columnFields.size(); i++){
+				StringBuilder novaString = new StringBuilder();
+		    	String str = string.get(i);
+		    	for (int j = 0; j < str.length(); j++) {
+		    	    char caractere = str.charAt(j);
+		    	    if (caractere == '\'') {
+		    	        novaString.append("");
+		    	    } else {
+		    	        novaString.append(caractere);
+		    	    }
+		    	}
+				sb.append(columnFields.get(i)+": "+"'"+novaString+"', ");
 			}
-
-			jsCode.delete(jsCode.length() - 2, jsCode.length());
-			jsCode.append(" }, ");
-
-		}
-		return jsCode.substring(0, jsCode.length() - 2) + "];";
+			 sb.delete(sb.length() - 2, sb.length()); // Remove a vírgula e o espaço extra
+		     sb.append("},\n ");
+		    }
+		    sb.append("];\n");
+		    
+		    return sb.toString();
 	}
-
+	
+	
+	
 	private String buildColumnsForTable() {
 		StringBuilder jsCode = new StringBuilder();
 		jsCode.append("\t" + "\t").append("columns: [");
@@ -95,9 +94,6 @@ public class CreateHTML {
 		// Adiciona o script com o link para o arquivo JavaScript do tabulator
 		html.append("<script type=\"text/javascript\">\n");
 
-		// Fecha o corpo e o documento HTML
-//        html.append("</body>\n");
-//        html.append("</html>");
 
 		String javaScriptTable1 = "var table = new Tabulator('#horario', { " + "data: tableData, "
 				+ "pagination:\"local\", " + "layout: 'fitDatafill', " + "paginationSize:10, " + "movableColumns:true, "
@@ -107,9 +103,12 @@ public class CreateHTML {
 
 		String javascriptCode = formatDataForHtml() + "\n" + javaScriptTable2;
 		html.append(javascriptCode);
+		
+		// Fecha o corpo e o documento HTML
 		html.append("</script>\n");
 		html.append("</body>\n");
 		html.append("</html>");
+		
 		File f = new File(pathFile);
 //		pathHtml = System.getProperty("user.dir") + "/" + "Horario.html";
 		try {

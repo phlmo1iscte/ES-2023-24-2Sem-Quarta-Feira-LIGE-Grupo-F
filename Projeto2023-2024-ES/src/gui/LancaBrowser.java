@@ -65,10 +65,10 @@ public class LancaBrowser  {
 					    	}
 					    	Desktop desk = Desktop.getDesktop();
 					    	desk.browse(new java.net.URI("file://" + novaString));
-							submitFilePage.setVisible(false);
+						//	submitFilePage.setVisible(false);
 						} else {
-							JOptionPane.showMessageDialog(submitFilePage, "Error processing remote file, please try again",
-									"Error", JOptionPane.ERROR_MESSAGE);
+						//	JOptionPane.showMessageDialog(submitFilePage, "Error processing remote file, please try again",
+						//			"Error", JOptionPane.ERROR_MESSAGE);
 						}
 					} catch (IOException ex) {
 						throw new RuntimeException(ex);
@@ -103,16 +103,16 @@ public class LancaBrowser  {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						submitFilePage.setVisible(false);
+				//		submitFilePage.setVisible(false);
 					} else {
 						// No caso de não existir o ficheiro aparece uma mensagem de erro
-						JOptionPane.showMessageDialog(submitFilePage, "File does not exist: " + file, "Error",
-								JOptionPane.ERROR_MESSAGE);
+//						JOptionPane.showMessageDialog(submitFilePage, "File does not exist: " + file, "Error",
+//								JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			} else {
 				// No caso de não existir o ficheiro aparece uma mensagem de erro
-				JOptionPane.showMessageDialog(submitFilePage, "Invalid file path.", "Error", JOptionPane.ERROR_MESSAGE);
+	//			JOptionPane.showMessageDialog(submitFilePage, "Invalid file path.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 	}
