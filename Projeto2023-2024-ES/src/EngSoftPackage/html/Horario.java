@@ -60,4 +60,23 @@ public class Horario {
 		return data;
 	}
 
+
+	@Override
+	public String toString(){
+
+		StringBuilder sb = new StringBuilder();
+        
+        // Adiciona os títulos das colunas separados por ";"
+        sb.append(String.join(";", columnTitles));
+        sb.append("\n");
+        
+        // Adiciona os dados separados por ";"
+        for (List<String> rowData : data) {
+			
+            sb.append(String.join(";", rowData));
+            sb.append("\n");
+        }
+        
+        return sb.toString();
+	}
 }

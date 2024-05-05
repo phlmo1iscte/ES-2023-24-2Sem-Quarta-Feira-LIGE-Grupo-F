@@ -1,5 +1,7 @@
 package EngSoftPackage.gui;
 
+import EngSoftPackage.export.HorarioToCsv;
+import EngSoftPackage.export.HorarioToJson;
 import EngSoftPackage.html.CreateHTML;
 import EngSoftPackage.html.Horario;
 import java.awt.Desktop;
@@ -12,6 +14,9 @@ import java.net.URISyntaxException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.net.URL;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 import javax.swing.JOptionPane;
 
@@ -60,7 +65,7 @@ public class LancaBrowser  {
 						String remoteFileLocalPath = "Projeto2023-2024-ES/assets/HorarioRemoto.csv";
 						
 						//fazemos num if a criação do ficheiro local para sabermos se tivemos sucesso ou não na criação do mesmo
-						if (saveToLocalFile(inputStream, remoteFileLocalPath)) {
+						if (saveToLocalFile2(inputStream, remoteFileLocalPath)) {
 
 							Horario horario = new Horario(remoteFileLocalPath);
 							CreateHTML ch = new CreateHTML(horario, remoteFileLocalPath);
@@ -96,7 +101,15 @@ public class LancaBrowser  {
 						// Se existir usa o csv para gerar os dados para a pagina HTML e depois abre a
 						// pagina
 						Horario horario = new Horario(filePath);
+						System.out.println(horario);
+
+						/*Metodos de export abaixo, já funcionais mas comentados 
+						para ver aonde devem ser implementados */
+						//HorarioToJson hToJson = new HorarioToJson(horario,  pathToExport);
+						//HorarioToCsv hToCsv = new HorarioToCsv(horario,  pathToExport);
+
 						CreateHTML ch = new CreateHTML(horario, filePath);
+
 				    	ch.generateHTMLPage();
 				    	StringBuilder novaString = new StringBuilder();
 				    	String str = ch.getPathHtml();
@@ -115,6 +128,7 @@ public class LancaBrowser  {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						//provavelmente vamos precisar de implementar 2 botões aqui para exportar como Json e csv??
 						submitFilePage.setVisible(false);
 					
 					} else {
@@ -164,9 +178,8 @@ public class LancaBrowser  {
 		}
 	}
 
-	/*public boolean saveToLocalFile2(InputStream inputStream, String localFilePath) {
+	public boolean saveToLocalFile2(InputStream inputStream, String localFilePath) {
         
-
         try {
             InputStreamReader reader = new InputStreamReader(inputStream);
 
@@ -185,11 +198,13 @@ public class LancaBrowser  {
             // Fechando os recursos
             csvParser.close();
             writer.close();
+			return true;
 
         } catch (IOException e) {
             e.printStackTrace();
+			return false;
         }
-    }*/
+    }
 	
 }  
 
