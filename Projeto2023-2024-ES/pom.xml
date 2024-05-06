@@ -10,14 +10,6 @@
   </properties>
   
   <dependencies>
-  
-    <!-- Dependência utilizada para leitura do ficheiro CSV Remoto-->
-    <dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-csv</artifactId>
-    <version>1.8</version> 
-    </dependency>
-
 
     <!-- Dependência utilizada para converter um objeto do tipo Horario em Json-->
     <dependency>
