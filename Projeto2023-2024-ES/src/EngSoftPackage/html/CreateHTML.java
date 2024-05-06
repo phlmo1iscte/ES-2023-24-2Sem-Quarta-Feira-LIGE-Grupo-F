@@ -51,10 +51,6 @@ public class CreateHTML {
 		    
 		    return sb.toString();
 	}
-
-
-	
-	
 	
 	private String buildColumnsForTable() {
 		StringBuilder jsCode = new StringBuilder();
