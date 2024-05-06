@@ -51,6 +51,8 @@ public class CreateHTML {
 		    
 		    return sb.toString();
 	}
+
+
 	
 	
 	
@@ -64,6 +66,21 @@ public class CreateHTML {
 		}
 		jsCode.delete(jsCode.length() - 1, jsCode.length());
 		jsCode.append("],");
+		return jsCode.toString();
+	}
+
+	private String buildToogleButtons() {
+		StringBuilder jsCode = new StringBuilder();
+		for (int i = 0; i < columnFields.size(); i++) {
+			//adiciona o primeiro marcador do botão e passa o Id da coluna a mostrar ou esconder
+			jsCode.append("<button onclick=\"toogleColuna(").append(i).append(")\">");
+			//adiciona o nome do botão, ou seja, a coluna a esconder
+			jsCode.append(userOrderTitles.get(i));
+			//adiciona o final do marcador do botão
+			jsCode.append("</button> -");
+		}
+		jsCode.delete(jsCode.length() - 1, jsCode.length());
+
 		return jsCode.toString();
 	}
 
@@ -87,13 +104,26 @@ public class CreateHTML {
 
 		// Adiciona o corpo do documento HTML
 		html.append("<body>\n");
+		
+		//adiciona o elemento div com os botões para mostrar e esconder as colunas "toogle"
+		html.append("<div>Toogle Colunas:");
+		html.append(buildToogleButtons());
+		html.append("</div>");
+
 
 		// Adiciona o elemento div com o id "horario"
 		html.append("<div id=\"horario\"></div>\n");
+		
+		//Cria 2 botões para exportar os ficheiros CSV e JSON
+		html.append("<div>\n");
+		html.append("<button id=\"download-csv\">Download CSV</button>\n");
+		html.append("<button id=\"download-json\">Download JSON</button>\n");
+		html.append("</div>\n");
+	
+		
 
 		// Adiciona o script com o link para o arquivo JavaScript do tabulator
 		html.append("<script type=\"text/javascript\">\n");
-
 
 		String javaScriptTable1 = "var table = new Tabulator('#horario', { " + "data: tableData, "
 				+ "pagination:\"local\", " + "layout: 'fitDatafill', " + "paginationSize:10, " + "movableColumns:true, "
@@ -103,6 +133,27 @@ public class CreateHTML {
 
 		String javascriptCode = formatDataForHtml() + "\n" + javaScriptTable2;
 		html.append(javascriptCode);
+
+		html.append("\n");
+
+		//cria 2 funções que respondem aos 2 botões para export de CSV e de JSON
+		html.append("document.getElementById(\"download-csv\").addEventListener(\"click\", function(){\n");
+		html.append("table.download(\"csv\", \"Horario.csv\");\n");
+		html.append("});\n");
+		html.append("document.getElementById(\"download-json\").addEventListener(\"click\", function(){\n");
+		html.append("table.download(\"json\", \"Horario.json\");\n");
+		html.append("});\n");
+
+		html.append("\n");
+
+		//função para esconder e mostrar colunas
+		html.append("function toogleColuna(columnIndex) {\n");
+		html.append("var column = table.getColumns()[columnIndex];\n");
+		html.append("if (column.getVisibility()) {\n");
+		html.append("table.hideColumn(column);\n");
+		html.append("} else {\n");
+		html.append("table.showColumn(column);\n");
+		html.append("}\n}\n");
 		
 		// Fecha o corpo e o documento HTML
 		html.append("</script>\n");

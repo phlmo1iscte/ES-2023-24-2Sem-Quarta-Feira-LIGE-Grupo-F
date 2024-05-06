@@ -161,7 +161,7 @@ public interface LayoutDefinable {
 		textArea.setLineWrap(false);
 		return textArea;
 	}
-
+	
 	/**
 	 * Define a visibilidade de um JFrame.
 	 *
