@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import EngSoftPackage.data.Horario;
+
 public class CreateHTML {
 
 	private List<String> columnFields;

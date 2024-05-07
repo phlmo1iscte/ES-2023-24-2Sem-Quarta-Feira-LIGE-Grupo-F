@@ -1,9 +1,10 @@
 package EngSoftPackage.gui;
 
+import EngSoftPackage.data.Horario;
 import EngSoftPackage.export.HorarioToCsv;
 import EngSoftPackage.export.HorarioToJson;
 import EngSoftPackage.html.CreateHTML;
-import EngSoftPackage.html.Horario;
+
 import java.awt.Desktop;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -124,6 +125,7 @@ public class LancaBrowser  {
 				    	Desktop desk = Desktop.getDesktop();
 				    	try {
 							desk.browse(new java.net.URI("file://" + novaString));
+							System.out.println("file://" + novaString);
 						} catch (IOException | URISyntaxException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

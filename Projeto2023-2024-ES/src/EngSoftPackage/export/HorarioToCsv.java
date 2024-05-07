@@ -3,7 +3,7 @@ package EngSoftPackage.export;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import EngSoftPackage.html.Horario;
+import EngSoftPackage.data.Horario;
 
 public class HorarioToCsv {
     private Horario horario;
