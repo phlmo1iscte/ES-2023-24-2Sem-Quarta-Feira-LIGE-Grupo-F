@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.8.4/dist/css/tabulator.min.css">
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.4/dist/js/tabulator.min.js"></script>
+</head>
+<body>
+<div>Toogle Colunas:<button onclick="toogleColuna(0)">Curso</button> -<button onclick="toogleColuna(1)">Unidade Curricular</button> -<button onclick="toogleColuna(2)">Turno</button> -<button onclick="toogleColuna(3)">Turma</button> -<button onclick="toogleColuna(4)">Inscritos no turno</button> -<button onclick="toogleColuna(5)">Dia da semana</button> -<button onclick="toogleColuna(6)">Hora início da aula</button> -<button onclick="toogleColuna(7)">Hora fim da aula</button> -<button onclick="toogleColuna(8)">Data da aula</button> -<button onclick="toogleColuna(9)">Características da sala pedida para a aula</button> -<button onclick="toogleColuna(10)">Sala atribuída à aula</button> </div><div id="horario"></div>
+<div>
+<button id="download-csv">Download CSV</button>
+<button id="download-json">Download JSON</button>
+</div>
+<script type="text/javascript">
+var tableData = [{ Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '1', Turmadescription: 'MEA1', Inscritosnoturnodescription: '30', Diadasemanadescription: 'Sex', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '02/12/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '2', Turmadescription: 'MEA2', Inscritosnoturnodescription: '31', Diadasemanadescription: 'Qua', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '23/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '3', Turmadescription: 'MEA3', Inscritosnoturnodescription: '32', Diadasemanadescription: 'Qua', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '16/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '4', Turmadescription: 'MEA4', Inscritosnoturnodescription: '33', Diadasemanadescription: 'Qua', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '09/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '5', Turmadescription: 'MEA5', Inscritosnoturnodescription: '34', Diadasemanadescription: 'Qua', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '02/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '6', Turmadescription: 'MEA6', Inscritosnoturnodescription: '35', Diadasemanadescription: 'Seg', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '28/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '7', Turmadescription: 'MEA7', Inscritosnoturnodescription: '36', Diadasemanadescription: 'Seg', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '21/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '8', Turmadescription: 'MEA8', Inscritosnoturnodescription: '37', Diadasemanadescription: 'Seg', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '14/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '9', Turmadescription: 'MEA9', Inscritosnoturnodescription: '38', Diadasemanadescription: 'Seg', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '07/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '10', Turmadescription: 'MEA10', Inscritosnoturnodescription: '39', Diadasemanadescription: 'Ter', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '29/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '11', Turmadescription: 'MEA11', Inscritosnoturnodescription: '40', Diadasemanadescription: 'Ter', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '22/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '12', Turmadescription: 'MEA12', Inscritosnoturnodescription: '41', Diadasemanadescription: 'Ter', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '15/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '13', Turmadescription: 'MEA13', Inscritosnoturnodescription: '42', Diadasemanadescription: 'Ter', Horainíciodaauladescription: '13:00:00', Horafimdaauladescription: '14:30:00', Datadaauladescription: '08/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '14', Turmadescription: 'MEA14', Inscritosnoturnodescription: '43', Diadasemanadescription: 'Sex', Horainíciodaauladescription: '10:30:00', Horafimdaauladescription: '12:00:00', Datadaauladescription: '04/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.26'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '15', Turmadescription: 'MEA15', Inscritosnoturnodescription: '44', Diadasemanadescription: 'Sex', Horainíciodaauladescription: '12:00:00', Horafimdaauladescription: '13:30:00', Datadaauladescription: '04/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.26'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '16', Turmadescription: 'MEA16', Inscritosnoturnodescription: '45', Diadasemanadescription: 'Sex', Horainíciodaauladescription: '14:30:00', Horafimdaauladescription: '16:00:00', Datadaauladescription: '02/12/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '17', Turmadescription: 'MEA17', Inscritosnoturnodescription: '46', Diadasemanadescription: 'Seg', Horainíciodaauladescription: '14:30:00', Horafimdaauladescription: '16:00:00', Datadaauladescription: '28/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '18', Turmadescription: 'MEA18', Inscritosnoturnodescription: '47', Diadasemanadescription: 'Seg', Horainíciodaauladescription: '14:30:00', Horafimdaauladescription: '16:00:00', Datadaauladescription: '21/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Teoria dos Jogos e dos Contratos', Turnodescription: '19', Turmadescription: 'MEA19', Inscritosnoturnodescription: '48', Diadasemanadescription: 'Seg', Horainíciodaauladescription: '14:30:00', Horafimdaauladescription: '16:00:00', Datadaauladescription: '14/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ { Cursodescription: 'ME', UnidadeCurriculardescription: 'Engenharia de Software', Turnodescription: '20', Turmadescription: 'MEA20', Inscritosnoturnodescription: '49', Diadasemanadescription: 'Seg', Horainíciodaauladescription: '14:30:00', Horafimdaauladescription: '16:00:00', Datadaauladescription: '07/11/22', Característicasdasalapedidaparaaauladescription: 'Sala Aulas Mestrado', Salaatribuídaàauladescription: 'AA2.25'},
+ ];
+
+var table = new Tabulator('#horario', { data: tableData, pagination:"local", layout: 'fitDatafill', paginationSize:10, movableColumns:true, paginationCounter:"rows", paginationSizeSelector:[10, 20, 30, 40], initialSort:[{column:"building",dir:"asc"}], 		columns: [		{title: 'Curso', field: 'Cursodescription', headerFilter:'input'},
+		{title: 'Unidade Curricular', field: 'UnidadeCurriculardescription', headerFilter:'input'},
+		{title: 'Turno', field: 'Turnodescription', headerFilter:'input'},
+		{title: 'Turma', field: 'Turmadescription', headerFilter:'input'},
+		{title: 'Inscritos no turno', field: 'Inscritosnoturnodescription', headerFilter:'input'},
+		{title: 'Dia da semana', field: 'Diadasemanadescription', headerFilter:'input'},
+		{title: 'Hora início da aula', field: 'Horainíciodaauladescription', headerFilter:'input'},
+		{title: 'Hora fim da aula', field: 'Horafimdaauladescription', headerFilter:'input'},
+		{title: 'Data da aula', field: 'Datadaauladescription', headerFilter:'input'},
+		{title: 'Características da sala pedida para a aula', field: 'Característicasdasalapedidaparaaauladescription', headerFilter:'input'},
+		{title: 'Sala atribuída à aula', field: 'Salaatribuídaàauladescription', headerFilter:'input'},],});;
+document.getElementById("download-csv").addEventListener("click", function(){
+table.download("csv", "Horario.csv");
+});
+document.getElementById("download-json").addEventListener("click", function(){
+table.download("json", "Horario.json");
+});
+
+function toogleColuna(columnIndex) {
+var column = table.getColumns()[columnIndex];
+if (column.getVisibility()) {
+table.hideColumn(column);
+} else {
+table.showColumn(column);
+}
+}
+</script>
+</body>
+</html>

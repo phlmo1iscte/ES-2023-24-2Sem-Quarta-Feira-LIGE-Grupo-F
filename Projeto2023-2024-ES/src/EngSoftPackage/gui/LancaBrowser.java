@@ -1,17 +1,23 @@
 package EngSoftPackage.gui;
 
 import EngSoftPackage.data.Horario;
+import EngSoftPackage.data.Sala;
+import EngSoftPackage.data.TipoSala;
 import EngSoftPackage.export.HorarioToCsv;
 import EngSoftPackage.export.HorarioToJson;
 import EngSoftPackage.html.CreateHTML;
 
 import java.awt.Desktop;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.io.BufferedReader;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -23,6 +29,8 @@ public class LancaBrowser  {
 	
 	private final submitPage submitFilePage;
 	private static final String remoteFileLocalPath = "Projeto2023-2024-ES/assets/HorarioRemoto.csv";
+	private static final String salasFilePath = "Projeto2023-2024-ES/assets/CaracterizaçãoDasSalas.csv";
+
 	
 	public LancaBrowser() {
 		submitFilePage = new submitPage();
@@ -44,7 +52,9 @@ public class LancaBrowser  {
 			// pathToExport é o caminho/localização que vamos utilizar para guardar o output
 			//pode ser um ficheiro CSV ou Json (4ºRequesito)
 			String pathToExport = submitFilePage.getCsvSaveFileLocation().getText();
-
+			
+			//criação das salas de aulas a partir do ficheiro de caracterização
+			createSalas();
 			//confirma se foi passada uma localização
 			if (filePath != null && !filePath.isEmpty()) {
 
@@ -102,7 +112,7 @@ public class LancaBrowser  {
 
 						// Se existir usa o csv para gerar os dados para a pagina HTML e depois abre a
 						// pagina
-						Horario horario = new Horario(filePath);
+						Horario horario = new Horario(filePath);					
 
 						/*Metodos de export abaixo, já funcionais mas comentados 
 						para ver aonde devem ser implementados */
@@ -125,7 +135,7 @@ public class LancaBrowser  {
 				    	Desktop desk = Desktop.getDesktop();
 				    	try {
 							desk.browse(new java.net.URI("file://" + novaString));
-							System.out.println("file://" + novaString);
+							
 						} catch (IOException | URISyntaxException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -181,6 +191,40 @@ public class LancaBrowser  {
 			return false;
 		}
 	}
+
+	private void createSalas(){
+		TipoSala ts = new TipoSala(salasFilePath);
+		List<Sala> salas = new ArrayList<>();
+        BufferedReader leitor = null;
+        try {
+            leitor = new BufferedReader(new FileReader(salasFilePath));
+            String linha;
+            boolean primeiraLinha = true;
+
+            while ((linha = leitor.readLine()) != null) {
+                if (primeiraLinha) {
+                    primeiraLinha = false;
+                } else {
+                    String[] campos = linha.split(";");
+                    Sala sala = new Sala(campos, ts);
+                    salas.add(sala);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (leitor != null) {
+                try {
+                    leitor.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+	}
+	
 	
 }  
 

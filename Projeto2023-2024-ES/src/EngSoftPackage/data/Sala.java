@@ -1,5 +1,6 @@
 package EngSoftPackage.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sala {
@@ -9,21 +10,36 @@ public class Sala {
     private int capacity;
     private int examCapacity;
     private int numberOfFeatures;
-    private List<String> feature;
+    private List<String> feature = new ArrayList<>();;
+    private String[] linhaFile;
+    private TipoSala ts;
 
     //abrir e trabalhar o ficheiro CSV noutra função e criar uma lista de salas
     //a partir desta classe de SALA
     //ver se é preciso criar um Objeto ou enumerado para lidar com as caracteristicas das salas
     
 
-    public Sala(String name, String building, int capacity, int examCapacity,  int numberOfFeatures, List<String> feature){    
-            this.name = name;
-            this.building = building;
-            this.capacity = capacity;
-            this.examCapacity = examCapacity;
-            this.numberOfFeatures = numberOfFeatures;
-            this.feature=feature;
+    public Sala(String[] linhaFile, TipoSala ts){    
+            this.linhaFile = linhaFile;
+            this.ts=ts;
+            Create();
 	}
+
+    public  void Create() {
+        this.building = linhaFile[0];
+        this.name = linhaFile[1];
+        this.capacity = Integer.parseInt(linhaFile[2]);
+        this.examCapacity = Integer.parseInt(linhaFile[3]);
+        this.numberOfFeatures = Integer.parseInt(linhaFile[4]);
+        
+        for (int i = 5; i < linhaFile.length; i++) {
+            if (linhaFile[i].equalsIgnoreCase("x")) {
+                feature.add(ts.getSalas().get(i-5));
+            }
+        }
+        
+        
+    }
 	
 	public String getName(){    
         return this.name;
@@ -53,7 +69,12 @@ public class Sala {
 	@Override
 	public String toString(){    
         StringBuilder sb = new StringBuilder();
-        //to do
+        sb.append("Edíficio: " + getBuilding() + "\n");
+        sb.append("Nome da Sala: " + getName() + "\n");
+        sb.append("Capacidade Normal: " + getCapacity() + "\n");
+        sb.append("Capacidade Exame: " + getExamCapacity() + "\n");
+        sb.append("Número caracteristicas da sala: " + getNumberOfFeatures() + "\n");
+        sb.append("Caracteristicas: " + feature.toString() + "\n");
         return sb.toString();
 	}
 }

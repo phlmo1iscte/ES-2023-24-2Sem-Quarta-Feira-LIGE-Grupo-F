@@ -72,7 +72,6 @@ public class Horario {
         
         // Adiciona os dados separados por ";"
         for (List<String> rowData : data) {
-			
             sb.append(String.join(";", rowData));
             sb.append("\n");
         }
