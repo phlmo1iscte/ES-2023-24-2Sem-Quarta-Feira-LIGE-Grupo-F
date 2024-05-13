@@ -102,16 +102,19 @@ public class CreateHTML {
 
 		// Adiciona o corpo do documento HTML
 		html.append("<body>\n");
+		html.append("<h1>Horário de Aulas 2023-2024</h1>\n");
 		
+		
+
+		// Adiciona o elemento div com o id "horario"
+		html.append("<div id=\"horario\"></div>\n");
+		
+
 		//adiciona o elemento div com os botões para mostrar e esconder as colunas "toogle"
 		html.append("<div>Toogle Colunas:");
 		html.append(buildToogleButtons());
 		html.append("</div>");
 
-
-		// Adiciona o elemento div com o id "horario"
-		html.append("<div id=\"horario\"></div>\n");
-		
 		//Cria 2 botões para exportar os ficheiros CSV e JSON
 		html.append("<div>\n");
 		html.append("<button id=\"download-csv\">Download CSV</button>\n");
