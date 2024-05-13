@@ -6,12 +6,14 @@ import EngSoftPackage.data.TipoSala;
 import EngSoftPackage.export.HorarioToCsv;
 import EngSoftPackage.export.HorarioToJson;
 import EngSoftPackage.html.CreateHTML;
+import EngSoftPackage.html.CreateSalaHTML;
 
 import java.awt.Desktop;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -54,7 +56,21 @@ public class LancaBrowser  {
 			String pathToExport = submitFilePage.getCsvSaveFileLocation().getText();
 			
 			//criação das salas de aulas a partir do ficheiro de caracterização
-			createSalas();
+			List<Sala> salas = createSalas();
+			//Criação do ficheiro HTML de caracterização das salas
+			CreateSalaHTML csh = new CreateSalaHTML(salas, salasFilePath, new TipoSala(salasFilePath));
+			csh.generateHTMLPage();
+			StringBuilder novaStringSalas = new StringBuilder();
+	    	String strs = csh.getPathHtml();
+			for (int i = 0; i < strs.length(); i++) {
+			    char caractere = strs.charAt(i);
+		 	    if (caractere == '\\') {
+		 	        novaStringSalas.append('/');
+			    } else {
+			        novaStringSalas.append(caractere);
+			    }
+	    	}
+
 			//confirma se foi passada uma localização
 			if (filePath != null && !filePath.isEmpty()) {
 
@@ -120,7 +136,7 @@ public class LancaBrowser  {
 						//HorarioToCsv hToCsv = new HorarioToCsv(horario,  pathToExport);
 
 						CreateHTML ch = new CreateHTML(horario, filePath);
-
+		
 				    	ch.generateHTMLPage();
 				    	StringBuilder novaString = new StringBuilder();
 				    	String str = ch.getPathHtml();
@@ -132,9 +148,11 @@ public class LancaBrowser  {
 				    	        novaString.append(caractere);
 				    	    }
 				    	}
-				    	Desktop desk = Desktop.getDesktop();
+
+						Desktop desk = Desktop.getDesktop();
 				    	try {
-							desk.browse(new java.net.URI("file://" + novaString));
+							desk.browse(new java.net.URI("file://" + novaString));							
+							desk.browse(new java.net.URI("file://" +  System.getProperty("user.dir") + File.separator + novaStringSalas));
 							
 						} catch (IOException | URISyntaxException e1) {
 							// TODO Auto-generated catch block
@@ -142,7 +160,6 @@ public class LancaBrowser  {
 						}
 						//provavelmente vamos precisar de implementar 2 botões aqui para exportar como Json e csv??
 						submitFilePage.setVisible(false);
-					
 					} else {
 						// No caso de não existir o ficheiro aparece uma mensagem de erro
 							JOptionPane.showMessageDialog(submitFilePage, "Ficheiro não existe! " + file, "Erro",
@@ -192,7 +209,7 @@ public class LancaBrowser  {
 		}
 	}
 
-	private void createSalas(){
+	private List<Sala> createSalas(){
 		TipoSala ts = new TipoSala(salasFilePath);
 		List<Sala> salas = new ArrayList<>();
         BufferedReader leitor = null;
@@ -221,6 +238,8 @@ public class LancaBrowser  {
                 }
             }
         }
+
+		return salas;
 
 
 	}

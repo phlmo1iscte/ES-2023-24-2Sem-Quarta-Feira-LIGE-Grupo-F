@@ -65,6 +65,10 @@ public class Sala {
         return this.numberOfFeatures;
 	}
 
+    public int size(){    
+        return this.numberOfFeatures;
+	}
+
 
 	@Override
 	public String toString(){    
