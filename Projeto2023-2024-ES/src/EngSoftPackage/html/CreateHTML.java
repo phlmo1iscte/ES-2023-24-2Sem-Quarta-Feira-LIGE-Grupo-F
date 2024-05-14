@@ -2,6 +2,10 @@ package EngSoftPackage.html;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +25,72 @@ public class CreateHTML {
 		this.data = horario.getData();
 		this.columnFields = new ArrayList<>();
 		userOrderTitles = horario.getTitles();
+		userOrderTitles.add("Semana do ano");
+		userOrderTitles.add("Semana do semestre");
 		for (String titles : userOrderTitles) {
 			String titlesTrimmed = titles.replace(" ", "");
 			columnFields.add(titlesTrimmed + "description");
 		}
+	
+	}
+
+	public int semanaDoAno(List<String> data) {
+		//verifica a String passada para ver se existe sequer uma data
+		if(data.size()<8)
+			return -1;
+		String dateString =data.get(8);
+		 // Definir o formato da data
+		if (dateString.equals("N/A")) 
+			return -1;
+		
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Converter a string de data em um objeto LocalDate
+        LocalDate date = LocalDate.parse(dateString, formatter);
+
+		return date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+	}
+	
+	public int semanaDoSemestre(List<String> data) {
+
+		//verifica a String passada para ver se existe sequer uma data
+		if(data.size()<8)
+			return -1;
+		String dateString =data.get(8);
+		 // Definir o formato da data
+		if (dateString.equals("N/A")) 
+			return -1;
+		
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Converter a string de data em um objeto LocalDate
+        LocalDate date = LocalDate.parse(dateString, formatter);
+
+		// Definindo as datas de início dos semestres
+        LocalDate semesterStart1 = LocalDate.of(date.getYear(), 9, 1);  // 1 de Setembro
+        LocalDate semesterEnd1 = LocalDate.of(date.getYear(), 12, 15);  // 15 de Dezembro
+        LocalDate semesterStart2 = LocalDate.of(date.getYear(), 2, 1);  // 1 de Fevereiro
+        LocalDate semesterEnd2 = LocalDate.of(date.getYear(), 5, 15);   // 15 de Maio
+
+        // Corrigindo o início do semestre para começar na segunda-feira (conforme a norma ISO)
+        if (semesterStart1.getDayOfWeek().getValue() != 1) {
+            semesterStart1 = semesterStart1.with(java.time.temporal.TemporalAdjusters.next(java.time.DayOfWeek.MONDAY));
+        }
+        if (semesterStart2.getDayOfWeek().getValue() != 1) {
+            semesterStart2 = semesterStart2.with(java.time.temporal.TemporalAdjusters.next(java.time.DayOfWeek.MONDAY));
+        }
+
+        // Calcula a semana do semestre
+        if (!date.isBefore(semesterStart1) && !date.isAfter(semesterEnd1)) {
+            // Semestre de Setembro a Dezembro
+            return (int) ChronoUnit.WEEKS.between(semesterStart1, date) + 1;
+        } else if (!date.isBefore(semesterStart2) && !date.isAfter(semesterEnd2)) {
+            // Semestre de Fevereiro a Maio
+            return (int) ChronoUnit.WEEKS.between(semesterStart2, date) + 1;
+        }
+
+        // Se a data não está em nenhum semestre
+        return -1;
 	}
 	
 	public String formatDataForHtml(){
@@ -33,7 +99,7 @@ public class CreateHTML {
 		
 		for (List<String> string : data) {
 			sb.append("{ ");
-			for(int i = 0; i < columnFields.size(); i++){
+			for(int i = 0; i < columnFields.size()-2; i++){
 				StringBuilder novaString = new StringBuilder();
 		    	String str = string.get(i);
 		    	for (int j = 0; j < str.length(); j++) {
@@ -46,8 +112,25 @@ public class CreateHTML {
 		    	}
 				sb.append(columnFields.get(i)+ ": " + "'" + novaString + "', ");
 			}
-			 sb.delete(sb.length() - 2, sb.length()); // Remove a vírgula e o espaço extra
-		     sb.append("},\n ");
+			int semanaDoAno = semanaDoAno(string);
+			sb.append(columnFields.get(columnFields.size()-2)+ ": " + "'");
+
+			if (semanaDoAno > 0) {
+				sb.append( semanaDoAno +  "',");
+			}else{
+				sb.append( "N/A',");
+			}
+
+			int semanaDoSemestre = semanaDoSemestre(string);
+			sb.append(columnFields.get(columnFields.size()-1)+ ": " + "'");
+
+			if (semanaDoSemestre > 0) {
+				sb.append( semanaDoSemestre +  "'");
+			}else{
+				sb.append( "Semana s/ aulas'");
+			}
+
+		    sb.append("},\n ");
 		}
 		    sb.append("];\n");
 		    

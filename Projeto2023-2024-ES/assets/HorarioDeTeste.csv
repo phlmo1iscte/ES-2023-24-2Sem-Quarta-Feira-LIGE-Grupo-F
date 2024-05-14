@@ -1,21 +1,21 @@
 Curso;Unidade Curricular;Turno;Turma;Inscritos no turno;Dia da semana;Hora início da aula;Hora fim da aula;Data da aula;Características da sala pedida para a aula;Sala atribuída à aula
-ME;Teoria dos Jogos e dos Contratos;1;MEA1;30;Sex;13:00:00;14:30:00;02/12/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;2;MEA2;31;Qua;13:00:00;14:30:00;23/11/22;Sala Aulas Mestrado;AA2.25
-ME;Teoria dos Jogos e dos Contratos;3;MEA3;32;Qua;13:00:00;14:30:00;16/11/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;4;MEA4;33;Qua;13:00:00;14:30:00;09/11/22;Sala Aulas Mestrado;AA2.25
-ME;Teoria dos Jogos e dos Contratos;5;MEA5;34;Qua;13:00:00;14:30:00;02/11/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;6;MEA6;35;Seg;13:00:00;14:30:00;28/11/22;Sala Aulas Mestrado;AA2.25
-ME;Teoria dos Jogos e dos Contratos;7;MEA7;36;Seg;13:00:00;14:30:00;21/11/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;8;MEA8;37;Seg;13:00:00;14:30:00;14/11/22;Sala Aulas Mestrado;AA2.25
-ME;Teoria dos Jogos e dos Contratos;9;MEA9;38;Seg;13:00:00;14:30:00;07/11/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;10;MEA10;39;Ter;13:00:00;14:30:00;29/11/22;Sala Aulas Mestrado;AA2.25
-ME;Teoria dos Jogos e dos Contratos;11;MEA11;40;Ter;13:00:00;14:30:00;22/11/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;12;MEA12;41;Ter;13:00:00;14:30:00;15/11/22;Sala Aulas Mestrado;AA2.25
-ME;Teoria dos Jogos e dos Contratos;13;MEA13;42;Ter;13:00:00;14:30:00;08/11/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;14;MEA14;43;Sex;10:30:00;12:00:00;04/11/22;Sala Aulas Mestrado;AA2.26
-ME;Teoria dos Jogos e dos Contratos;15;MEA15;44;Sex;12:00:00;13:30:00;04/11/22;Sala Aulas Mestrado;AA2.26
-ME;Engenharia de Software;16;MEA16;45;Sex;14:30:00;16:00:00;02/12/22;Sala Aulas Mestrado;AA2.25
-ME;Teoria dos Jogos e dos Contratos;17;MEA17;46;Seg;14:30:00;16:00:00;28/11/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;18;MEA18;47;Seg;14:30:00;16:00:00;21/11/22;Sala Aulas Mestrado;AA2.25
-ME;Teoria dos Jogos e dos Contratos;19;MEA19;48;Seg;14:30:00;16:00:00;14/11/22;Sala Aulas Mestrado;AA2.25
-ME;Engenharia de Software;20;MEA20;49;Seg;14:30:00;16:00:00;07/11/22;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;1;MEA1;30;Sex;13:00:00;14:30:00;02/12/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;2;MEA2;31;Qua;13:00:00;14:30:00;23/01/2022;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;3;MEA3;32;Qua;13:00:00;14:30:00;16/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;4;MEA4;33;Qua;13:00:00;14:30:00;09/06/2022;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;5;MEA5;34;Qua;13:00:00;14:30:00;02/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;6;MEA6;35;Seg;13:00:00;14:30:00;28/05/2022;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;7;MEA7;36;Seg;13:00:00;14:30:00;21/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;8;MEA8;37;Seg;13:00:00;14:30:00;14/03/2022;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;9;MEA9;38;Seg;13:00:00;14:30:00;07/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;10;MEA10;39;Ter;13:00:00;14:30:00;29/02/2022;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;11;MEA11;40;Ter;13:00:00;14:30:00;22/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;12;MEA12;41;Ter;13:00:00;14:30:00;15/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;13;MEA13;42;Ter;13:00:00;14:30:00;08/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;14;MEA14;43;Sex;10:30:00;12:00:00;04/09/2022;Sala Aulas Mestrado;AA2.26
+ME;Teoria dos Jogos e dos Contratos;15;MEA15;44;Sex;12:00:00;13:30:00;04/11/2022;Sala Aulas Mestrado;AA2.26
+ME;Engenharia de Software;16;MEA16;45;Sex;14:30:00;16:00:00;02/12/2022;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;17;MEA17;46;Seg;14:30:00;16:00:00;28/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;18;MEA18;47;Seg;14:30:00;16:00:00;21/10/2022;Sala Aulas Mestrado;AA2.25
+ME;Teoria dos Jogos e dos Contratos;19;MEA19;48;Seg;14:30:00;16:00:00;14/11/2022;Sala Aulas Mestrado;AA2.25
+ME;Engenharia de Software;20;MEA20;49;Seg;14:30:00;16:00:00;07/11/2022;Sala Aulas Mestrado;AA2.25
