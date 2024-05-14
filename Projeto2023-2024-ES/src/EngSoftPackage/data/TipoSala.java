@@ -6,23 +6,37 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Classe que representa os tipos ou caracteristicas das salas
+ * Esta classe possui informações sobre as caracteristicas das salas numa lista e o caminho pro file ".csv" com as salas
+ * Implementa os métodos lerCampos - para criação da lista com as  caracteristicas salas a partir de uma linha do ficheiro CSV que recebe,
+ * metodo get salas e  um @override para visualização das caracteristicas das salas 
+ */
+
 public class TipoSala {
 
 
     private String filePath;
     private List<String> salas;
 
-    //abrir e trabalhar o ficheiro CSV noutra função e criar uma lista de salas
-    //a partir desta classe de SALA
-    //ver se é preciso criar um Objeto ou enumerado para lidar com as caracteristicas das salas
-    
-
+    /**
+     * Construtor da classe TipoSala.
+     *
+     * @param filePath caminho para o ficheiro csv com informação sobre as salas 
+     */
     public TipoSala(String filePath){    
             this.filePath = filePath;
             salas = lerCampos(filePath);
             
 	}
 
+    /**
+     * metodo que Lê do ficheiro csv os tipos de salas
+     * @param arquivoCSV caminho para o ficheiro csv com informação sobre as salas 
+     * @return campos - lista com as caracterisicas de salas lida do ficheiro
+	 * @throws IOException Se ocorrer um erro durante a leitura do ficheiro.
+     */
     public static List<String> lerCampos(String arquivoCSV) {
         List<String> campos = new ArrayList<>();
         BufferedReader leitor = null;
@@ -53,10 +67,19 @@ public class TipoSala {
         return campos;
     }
     
+    /**
+     * Método get
+     * Obtém a lista com as caracteristicas das salas
+     * @return salas
+     */
     public List<String> getSalas(){    
         return this.salas;
 	}
 
+    /**
+     * @override do metodo toString para visualizar as caracteristicas das salas 
+     * @return salas string com todos os tipos de salas
+     */
     @Override
 	public String toString(){    
         return salas.toString();

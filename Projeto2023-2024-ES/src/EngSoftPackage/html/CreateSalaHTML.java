@@ -2,12 +2,21 @@ package EngSoftPackage.html;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import EngSoftPackage.data.TipoSala;
 import EngSoftPackage.data.Sala;
 
+/**
+ * Classe que constroi a página HTML com a Caracterização das salas
+ * Esta classe possui informações sobre as salas, o caminho para o ficheiro das salas(utilizado para criar o caminho do HTML),
+ * os Tipos de salas(caracteristicas), e os titulos das tabelas a serem criadas no HTML
+ * Implementa os métodos formatDataForHtml, buildColumnsForTable, generateHTMLPage que vão
+ * manipular a info para string e criar o corpo do html e o método getPathHtml que gera o caminho HTML do ficheiro
+ * 
+ */
 public class CreateSalaHTML {
 
 	private List<Sala> salas;
@@ -16,6 +25,13 @@ public class CreateSalaHTML {
     private List<String> TipoSalas;
 
 
+	/**
+     * Construtor da classe CreateSalaHTML.
+     *
+     * @param salas lista com todas as salas
+     * @param pathFile caminho para o ficheiro 
+     * @param ts tipos de sala (caracteristicas)
+     */
 	public CreateSalaHTML(List<Sala> salas, String pathFile, TipoSala ts) {
 		this.pathFile = pathFile.replace(".csv",".html");
 		this.salas = salas;
@@ -25,6 +41,11 @@ public class CreateSalaHTML {
         this.TipoSalas =ts.getSalas();
 	}
 	
+	/**
+	 * este metodo vai aceder a lista das salas e suas infos e cria a tabela 
+	 * a ser representada pelo tabulator 
+	 * @return sb string com os dados da tabela
+	 */
 	public String formatDataForHtml(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("var tableData = [");
@@ -62,6 +83,10 @@ public class CreateSalaHTML {
 		return sb.toString();
 	}
 	
+	/**
+	 * este metodo vai criar a estrutura das colunas da tabela
+	 * @return JsCode string com os dados das colunas
+	 */
 	private String buildColumnsForTable() {
 		StringBuilder jsCode = new StringBuilder();
 		jsCode.append("\t" + "\t").append("columns: [");
@@ -78,6 +103,13 @@ public class CreateSalaHTML {
             jsCode.append("],");
 		return jsCode.toString();
 	}
+	
+	/**
+	 * este metodo vai criar e estruturar o corpo do nosso ficheiro HTML e chama os dois 
+	 * outros 2 metodos anteriores de apoio ao preenchimento do HTML
+	 * 
+	 * @throws IOException Se ocorrer um erro durante a criação do ficheiro.
+     */
 	
 	public void generateHTMLPage() {
 		StringBuilder html = new StringBuilder();
@@ -123,17 +155,23 @@ public class CreateSalaHTML {
 		html.append("</body>\n");
 		html.append("</html>");
 		
+		//criação do ficheiro HTML onde vamos transcrever a nossa string HTML que tem o conteudo da pagina
 		File f = new File(pathFile.replace("ã", "a").replace("ç", "c"));
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 			bw.write(html.toString());
 			bw.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}
 
+	/**
+	 * Método get
+     * Obtém a o caminho para o ficheiro html
+     * @return pathFile 
+     */
 	public String getPathHtml() {
 		return pathFile.replace("ã", "a").replace("ç", "c");
 	}

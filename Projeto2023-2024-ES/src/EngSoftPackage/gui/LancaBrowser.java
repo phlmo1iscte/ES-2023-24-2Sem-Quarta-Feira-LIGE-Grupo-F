@@ -25,26 +25,51 @@ import javax.swing.JOptionPane;
 
 
 
+/**
+ * Classe principal que gerencia a interface gráfica para submissão e processamento de arquivos de horários e salas.
+ * Esta classe provê uma interface onde o usuário pode submeter localizações de arquivos CSV para horários e
+ * descrições de salas, além de exportar essas informações para formatos HTML ou outros formatos como JSON e CSV.
+ * A classe também gerencia a visualização desses arquivos exportados no navegador padrão do usuário.
+ * 
+ * O fluxo principal envolve configurar uma página para submissão dos dados ({@code submitPage}),
+ * manipular a entrada de arquivos locais ou remotos, e gerar visualizações HTML para as informações processadas.
+
+ */
 
 public class LancaBrowser  { 
 
-	
 	private final submitPage submitFilePage;
 	private static final String remoteFileLocalPath = "Projeto2023-2024-ES/assets/HorarioRemoto.csv";
 	private static final String salasFilePath = "Projeto2023-2024-ES/assets/CaracterizaçãoDasSalas.csv";
 
-	
+	/**
+	 * Construtor da classe LancaBrowser.
+	 * inicializa a interface gráfica e prepara a página de submissão.
+     */
+	 
 	public LancaBrowser() {
 		submitFilePage = new submitPage();
 		submitFilePage.setVisible(true);
 		setUpContinueAndSubmitButton();
 	}
 	
+	/**
+	 * Método main
+     * Ponto de entrada do programa. Cria uma instância de {@code LancaBrowser} e inicia a interface do usuário.
+     *
+     * @param args Argumentos de linha de comando (não utilizados).
+     * @throws IOException Se ocorrer um erro de entrada/saída ao inicializar a interface.
+     */
 	public static void main(String[] args) throws IOException {
 	//	SwingUtilities.invokeLater(LancaBrowser::new);
 		LancaBrowser lb = new LancaBrowser();
 	}
 	
+	/**
+     * Configura o botão de continuação e submissão na página de submissão.
+     * Define a lógica de tratamento de eventos para processar os arquivos fornecidos pelo usuário,
+     * gerando páginas HTML para visualização e manipulando arquivos remotos ou locais conforme necessário.
+     */
 	private void setUpContinueAndSubmitButton () {
 		submitFilePage.getContinueButton().addActionListener(e -> {
 			// Vai buscar o input do utilizador
@@ -176,7 +201,7 @@ public class LancaBrowser  {
 		});
 	}
 	
-	/*
+	/**
 	 *Cria o ficheiro CSV local e devolve true se tiver sucesso
 	 *
 	 * Classe InputStream é uma classe abstrata que serve como a superclasse de todos os 
@@ -186,7 +211,9 @@ public class LancaBrowser  {
 	 * 
 	 * @param inputStream   	faz a leitura do ficheiro. 
 	 * @param localFilePath 	localização local do ficheiro.
-	 */
+	 * @return  true se o arquivo foi salvo com sucesso,  false caso contrário.
+     * @throws IOException Se ocorrer um erro durante o download ou gravação do arquivo.
+     */
 	private boolean saveToLocalFile(URL remoteFile,  String localFilePath) {
 	
 		try {
@@ -209,6 +236,14 @@ public class LancaBrowser  {
 		}
 	}
 
+	 /**
+     * Cria e retorna uma lista de {@code Sala} a partir de um arquivo CSV.
+     * Este método lê o arquivo CSV de salas, parseando cada linha para criar objetos {@code Sala}.
+     *
+     * @return Uma lista de objetos {@code Sala} que foram lidos e instanciados a partir do arquivo CSV.
+	 * @throws IOException Se ocorrer um erro durante a abertura do arquivo.
+     */
+     
 	private List<Sala> createSalas(){
 		TipoSala ts = new TipoSala(salasFilePath);
 		List<Sala> salas = new ArrayList<>();

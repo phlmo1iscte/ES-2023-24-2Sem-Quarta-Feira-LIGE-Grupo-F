@@ -11,6 +11,15 @@ import java.util.List;
 
 import EngSoftPackage.data.Horario;
 
+
+/**
+ * Classe que constroi a página HTML com o Horario
+ * Esta classe possui informações sobre o Horario, o caminho para o ficheiro de Horario(utilizado para criar o caminho do HTML)
+ * Implementa os métodos formatDataForHtml, buildColumnsForTable, generateHTMLPage e buildToogleButtons que vão
+ * manipular a info para string e criar o corpo do html;
+ * o método getPathHtml que gera o caminho HTML do ficheiro
+ * e os metodos semanaDoAno e semanaDoSemestre que manipulam a data da aula para fazer o respectivo campo do número da semana
+ */
 public class CreateHTML {
 
 	private List<String> columnFields;
@@ -19,6 +28,13 @@ public class CreateHTML {
 	private Horario horario;
 	private String pathFile;
 
+
+	/**
+     * Construtor da classe CreateSalaHTML.
+     *
+     * @param h objeto com o Horario
+     * @param pathFile caminho para o ficheiro 
+     */
 	public CreateHTML(Horario h, String pathFile) {
 		this.pathFile = pathFile.replace(".csv",".html");
 		this.horario = h;
@@ -33,6 +49,12 @@ public class CreateHTML {
 		}
 	
 	}
+
+	/**
+     * metodo que calcula a semana do ano de acordo a uma data passada
+     * @param data um campo do ficheiro Horario no formato List<string> com varias infos sobre o mesmo
+     * @return a semana do ano, caso seja passada uma data inválida retorna -1
+     */
 
 	public int semanaDoAno(List<String> data) {
 		//verifica a String passada para ver se existe sequer uma data
@@ -51,6 +73,11 @@ public class CreateHTML {
 		return date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
 	}
 	
+	/**
+     * metodo que calcula a semana do Semestre de acordo a uma data passada
+     * @param data um campo do ficheiro Horario no formato List<string> com varias infos sobre o mesmo
+     * @return a semana do ano, caso seja passada uma data inválida retorna -1
+     */
 	public int semanaDoSemestre(List<String> data) {
 
 		//verifica a String passada para ver se existe sequer uma data
@@ -92,6 +119,12 @@ public class CreateHTML {
         // Se a data não está em nenhum semestre
         return -1;
 	}
+	
+	/**
+	 * este metodo vai aceder ao horario e suas infos e cria a tabela 
+	 * a ser representada pelo tabulator 
+	 * @return sb string com os dados da tabela
+	 */
 	
 	public String formatDataForHtml(){
 		StringBuilder sb = new StringBuilder();
@@ -137,6 +170,11 @@ public class CreateHTML {
 		    return sb.toString();
 	}
 	
+
+	/**
+	 * este metodo vai criar a estrutura das colunas da tabela
+	 * @return JsCode string com os dados das colunas
+	 */
 	private String buildColumnsForTable() {
 		StringBuilder jsCode = new StringBuilder();
 		jsCode.append("\t" + "\t").append("columns: [");
@@ -150,6 +188,10 @@ public class CreateHTML {
 		return jsCode.toString();
 	}
 
+	/**
+	 * este metodo vai criar os botões que controlam o script que mostra e esconde as colunas da tabela
+	 * @return Jscode string com os botões 
+	 */
 	private String buildToogleButtons() {
 		StringBuilder jsCode = new StringBuilder();
 		for (int i = 0; i < columnFields.size(); i++) {
@@ -165,6 +207,12 @@ public class CreateHTML {
 		return jsCode.toString();
 	}
 
+	/**
+	 * este metodo vai criar e estruturar o corpo do nosso ficheiro HTML 
+	 * 
+	 * @throws IOException Se ocorrer um erro durante a criação do ficheiro.
+     */
+	 
 	public void generateHTMLPage() {
 		StringBuilder html = new StringBuilder();
 
@@ -244,18 +292,23 @@ public class CreateHTML {
 		html.append("</body>\n");
 		html.append("</html>");
 		
+
+		//criação do ficheiro HTML onde vamos transcrever a nossa string HTML que tem o conteudo da pagina
 		File f = new File(pathFile);
-//		pathHtml = System.getProperty("user.dir") + "/" + "Horario.html";
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 			bw.write(html.toString());
 			bw.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
-
 	}
 
+	/**
+	 * Método get
+     * Obtém a o caminho para o ficheiro html
+     * @return pathFile 
+     */
 	public String getPathHtml() {
 		return pathFile;
 	}
