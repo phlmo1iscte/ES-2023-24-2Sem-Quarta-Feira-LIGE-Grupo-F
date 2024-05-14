@@ -26,12 +26,20 @@ Este projeto deverá permitir a leitura de dados sobre os horários do ISCTE, re
 
 
 ### Descrição de erros
-
+-Implementações até ao ponto 4 completas e sem erros
 
 
 ### Funcionalidades não implementadas ou incompletas
 
-- Esconder as colunas;
-- Adicionar as colunas;
-- incopatibilidade nos caracteres especiais.
- 
+- Opção de sugestão de slots para uma aula de substituição da UC, mediante limitações ao bom funcionamento da faculdade;
+- Visualizar sob a forma gráfica a relação de conflitualidade entre aulas;
+- Visualizar sob a forma gráfica o mapa de ocupaçãodas salas.
+
+### Funcionalidades  implementadas 
+
+- Carregar um horário a partir de um ficheiro CSV local ou remoto;
+- Visualizar e navegar no horário;
+- Carregar a Caracterização das salas a partir de um ficheiro CSV;
+- Visualizar e navegar no cadastro das salas do ISCTE;
+- Opção de gravar em CSV e JSON os horários alterados;
+- Adicionadas à tabela as colunas Semana do ano (1 a 52) e Semana do semestre (1 a 15) correspondentes às semanas em que as aulas ocorrem;
