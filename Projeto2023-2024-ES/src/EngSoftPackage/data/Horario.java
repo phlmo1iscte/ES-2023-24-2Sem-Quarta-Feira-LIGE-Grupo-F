@@ -97,7 +97,7 @@ public class Horario {
      * Obtém os titulos dos campos dos horários
      * @return columnTitles titulos dos campos dos horários
      */
-	public List<String> getTitles() {
+	public static List<String> getTitles() {
 		return columnTitles;
 	}
 
@@ -106,7 +106,7 @@ public class Horario {
      * Obtém os dados do Horario, ou seja aulas marcadas
      * @return data dados do Horario
      */
-	public List<List<String>> getData() {
+	public static List<List<String>> getData() {
 		return data;
 	}
 

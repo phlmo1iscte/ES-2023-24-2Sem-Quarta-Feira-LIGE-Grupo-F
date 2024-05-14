@@ -19,7 +19,7 @@ public class Sala {
     private int capacity;
     private int examCapacity;
     private int numberOfFeatures;
-    private List<String> feature = new ArrayList<>();;
+    private List<String> feature = new ArrayList<>();
     private String[] linhaFile;
     private TipoSala ts;
 
