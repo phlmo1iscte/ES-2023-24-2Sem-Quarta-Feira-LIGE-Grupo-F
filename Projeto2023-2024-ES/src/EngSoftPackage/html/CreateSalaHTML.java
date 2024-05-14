@@ -131,10 +131,11 @@ public class CreateSalaHTML {
 
 		// Adiciona o corpo do documento HTML
 		html.append("<body>\n");
-	
+
+		html.append("<h1>Caracterização das Salas</h1>\n");
+		
 		// Adiciona o elemento div com o id "horario"
 		html.append("<div id=\"salas\"></div>\n");
-			
 
 		// Adiciona o script com o link para o arquivo JavaScript do tabulator
 		html.append("<script type=\"text/javascript\">\n");

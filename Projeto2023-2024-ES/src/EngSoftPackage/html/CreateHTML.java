@@ -236,23 +236,22 @@ public class CreateHTML {
 		html.append("<h1>Horário de Aulas 2023-2024</h1>\n");
 		
 		
+		html.append("<div>\n");
+		html.append("<button id=\"download-csv\">Download CSV</button>\n");
+		html.append("<button id=\"download-json\">Download JSON</button>\n");
+		html.append("<p></p></div>");
+	 	
 
 		// Adiciona o elemento div com o id "horario"
 		html.append("<div id=\"horario\"></div>\n");
 		
 
 		//adiciona o elemento div com os botões para mostrar e esconder as colunas "toogle"
-		html.append("<div>Toogle Colunas:");
+		html.append("<div>");
+		html.append("<p>Toogle Colunas:</p>");
 		html.append(buildToogleButtons());
 		html.append("</div>");
 
-		//Cria 2 botões para exportar os ficheiros CSV e JSON
-		html.append("<div>\n");
-		html.append("<button id=\"download-csv\">Download CSV</button>\n");
-		html.append("<button id=\"download-json\">Download JSON</button>\n");
-		html.append("</div>\n");
-	
-		
 
 		// Adiciona o script com o link para o arquivo JavaScript do tabulator
 		html.append("<script type=\"text/javascript\">\n");

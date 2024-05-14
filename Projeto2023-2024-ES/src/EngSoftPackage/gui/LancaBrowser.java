@@ -3,8 +3,6 @@ package EngSoftPackage.gui;
 import EngSoftPackage.data.Horario;
 import EngSoftPackage.data.Sala;
 import EngSoftPackage.data.TipoSala;
-import EngSoftPackage.export.HorarioToCsv;
-import EngSoftPackage.export.HorarioToJson;
 import EngSoftPackage.html.CreateHTML;
 import EngSoftPackage.html.CreateSalaHTML;
 
@@ -13,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -134,7 +131,6 @@ public class LancaBrowser  {
 								System.out.println("file://" + System.getProperty("user.dir") + novaString);
 								desk.browse(new java.net.URI("file://" + System.getProperty("user.dir") + "/"+ novaString ));
 							} catch (IOException | URISyntaxException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 							submitFilePage.setVisible(false);

@@ -9,15 +9,13 @@ import java.util.List;
 
 /**
  * Classe que representa os tipos ou caracteristicas das salas
- * Esta classe possui informações sobre as caracteristicas das salas numa lista e o caminho pro file ".csv" com as salas
+ * Esta classe possui informações sobre as caracteristicas das salas numa lista.
  * Implementa os métodos lerCampos - para criação da lista com as  caracteristicas salas a partir de uma linha do ficheiro CSV que recebe,
  * metodo get salas e  um @override para visualização das caracteristicas das salas 
  */
 
 public class TipoSala {
 
-
-    private String filePath;
     private List<String> salas;
 
     /**
@@ -26,7 +24,6 @@ public class TipoSala {
      * @param filePath caminho para o ficheiro csv com informação sobre as salas 
      */
     public TipoSala(String filePath){    
-            this.filePath = filePath;
             salas = lerCampos(filePath);
             
 	}
