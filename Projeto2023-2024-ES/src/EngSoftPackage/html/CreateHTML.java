@@ -235,17 +235,14 @@ public class CreateHTML {
 		html.append("<body>\n");
 		html.append("<h1>Horário de Aulas 2023-2024</h1>\n");
 		
-		
 		html.append("<div>\n");
 		html.append("<button id=\"download-csv\">Download CSV</button>\n");
 		html.append("<button id=\"download-json\">Download JSON</button>\n");
 		html.append("<p></p></div>");
 	 	
-
 		// Adiciona o elemento div com o id "horario"
 		html.append("<div id=\"horario\"></div>\n");
 		
-
 		//adiciona o elemento div com os botões para mostrar e esconder as colunas "toogle"
 		html.append("<div>");
 		html.append("<p>Toogle Colunas:</p>");
@@ -290,7 +287,6 @@ public class CreateHTML {
 		html.append("</script>\n");
 		html.append("</body>\n");
 		html.append("</html>");
-		
 
 		//criação do ficheiro HTML onde vamos transcrever a nossa string HTML que tem o conteudo da pagina
 		File f = new File(pathFile);
